@@ -64,7 +64,7 @@
                <td> {{ $row->kepada}}</td>
                <td> {{ $row->nomor}}</td>
                <td> {{ $row->perihal}}</td>
-               <td> {{ $row->kategori_id}}</td>
+               <td> {{ $row->kategori->nama}}</td>
                <td> {{ $row->catatan}}</td>
                <td>
                 @if($row->file)
@@ -73,7 +73,11 @@
                 <img src="{{asset('public/uploads/no-image.png')}}" width="50px" height="50px">
                 @endif
               </td>
-               <td> {{ $row->status}}</td>
+              @if($row->status== 'Diproses')
+               <td><i class="fas fa-plus">{{ $row->status}}</i></td>
+               @else
+               <td><i class="fas fa-trash">{{ $row->status}}</i></td>
+               @endif
                <td>
                 <form action="{{route('surat_keluar.destroy',$row->id)}}" method="POST">  
                   <input type="hidden" name="_method" value="DELETE">

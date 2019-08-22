@@ -64,7 +64,7 @@
                <td> {{ $row->dari}}</td>
                <td> {{ $row->nomor}}</td>
                <td> {{ $row->perihal}}</td>
-               <td> {{ $row->kategori_id}}</td>
+               <td> {{ $row->kategori->nama}}</td>
                <td> {{ $row->catatan}}</td>
                <td>
                 @if($row->file)

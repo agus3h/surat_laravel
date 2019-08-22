@@ -3,7 +3,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
-  <title>AdminLTE 3 | Blank Page</title>
+  <title>App_Surat</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
 
@@ -33,7 +33,7 @@
            alt="AdminLTE Logo"
            class="brand-image img-circle elevation-3"
            style="opacity: .8">
-      <span class="brand-text font-weight-light">AdminLTE 3</span>
+      <span class="brand-text font-weight-light">App_Surat</span>
     </a>
 
     <!-- Sidebar -->
@@ -118,27 +118,19 @@
             </ul>
           </li>
          
-
-          <li>
-              <a href="{{ route('logout') }}"
-                  onclick="event.preventDefault();
-                           document.getElementById('logout-form').submit();">
-                  Logout
-              </a>
-
+          <li class="nav-item">
+                <a href="{{route('logout')}}" onclick="event.preventDefault();
+              document.getElementById('logout-form').submit();" class="nav-link">
+                  <i class="far fa-circle nav-icon"></i>
+                  <p>Logout</p>
+                </a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">
                   {{ csrf_field() }}
               </form>
           </li>
-             
-         
-        
-        
+
           
-         
-         
-         
-         
+ 
           
         
         </ul>
@@ -156,8 +148,7 @@
     <div class="float-right d-none d-sm-block">
       <b>Version</b> 3.0.0-beta.1
     </div>
-    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">agus3h</a>.</strong> All rights
-    reserved.
+    <strong>Copyright &copy; 2014-2019 <a href="http://adminlte.io">agus3h</a>.</strong> All rights reserved.
   </footer>
 
   <!-- Control Sidebar -->

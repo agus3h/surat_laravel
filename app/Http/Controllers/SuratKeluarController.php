@@ -30,7 +30,7 @@ class SuratKeluarController extends Controller
         $keluar=Keluar::orderBy('created_at','DESC')->where('status','Diproses')->paginate(5);
         return view('surat_keluar.indexpencatat', compact('keluar'));    
         }
-        $keluar=Keluar::orderBy('created_at','DESC')->paginate(5);
+        $keluar=Keluar::with('kategori')->orderBy('created_at','DESC')->paginate(5);
         return view('surat_keluar.index', compact('keluar'));
     }
 
@@ -94,7 +94,7 @@ class SuratKeluarController extends Controller
 
        $file=null;
         if ($request->hasFile('file')) {
-            $file=$this->saveFile($request->dari,$request->file('file'));
+            $file=$this->saveFile($request->kepada,$request->file('file'));
         }
 
         
@@ -158,7 +158,7 @@ class SuratKeluarController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'catatan'=>'required|max:500',
             'status'=>'required',
-            'file'=>'nullable|image|mimes:jpg,jpeg,png'
+            'file'=>'nullable|image|mimes:jpg,jpeg,png|max:2084'
         ];
         $pesan=[
             'kepada.required'=>'Field kepada harus diisi',
@@ -171,7 +171,8 @@ class SuratKeluarController extends Controller
             'catatan.max'=>'maksimal 500 karakter',
             'status.required'=>'Status harus diisi',
             'kategori_id.required'=>'Kategori harus diisi',
-            'file.mimes:jpg,png,jpeg'=>'Format file harus jpg,jpeg atau png'
+            'file.mimes:jpg,png,jpeg'=>'Format file harus jpg,jpeg atau png',
+            'file.max'=>'File terlalu besar'
         ];
 
         $keluar= Keluar::findOrFail($id);   

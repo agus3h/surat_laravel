@@ -9,6 +9,7 @@ use App\Kategori;
 use File;
 use Image;
 
+
 class SuratMasukController extends Controller
 {
     /**
@@ -27,11 +28,11 @@ class SuratMasukController extends Controller
     public function index()
     {
           
-       if (Auth::user()->role=='pencatat') {
-         $masuk=Masuk::orderBy('created_at','DESC')->where('status','Diproses')->paginate(5);  
-           return view('surat_masuk.indexpencatat', compact('masuk'));
+        if (Auth::user()->role=='pencatat') {
+        $masuk=Masuk::orderBy('created_at','DESC')->where('status','Diproses')->paginate(5);  
+        return view('surat_masuk.indexpencatat', compact('masuk'));
        }
-        $masuk=Masuk::orderBy('created_at','DESC')->paginate(5);
+        $masuk=Masuk::with('kategori')->orderBy('created_at','DESC')->paginate(5);
         return view('surat_masuk.index', compact('masuk'));
         
     }
@@ -67,7 +68,7 @@ class SuratMasukController extends Controller
             'kategori_id' => 'required|exists:kategoris,id',
             'catatan'=>'required|max:500',
             'status'=>'required',
-            'file'=>'nullable|mimes:jpg,jpeg,png|max:2048'
+            'file'=>'nullable|mimes:jpg,jpeg,png|max:2084'
         ];
         $pesan=[
             'dari.required'=>'Surat dari siapa..!!!',
@@ -84,12 +85,6 @@ class SuratMasukController extends Controller
             'file.max'=>'File terlalu besar..!!!'
         ];
 
-
-        $file=null;
-        if ($request->hasFile('file')) {
-            $file=$this->saveFile($request->dari,$request->file('file'));
-        }
-
         $this->validate($request,$rules,$pesan);
         $n=$request->nomor;
         $d=$request->dari;
@@ -98,6 +93,13 @@ class SuratMasukController extends Controller
         $s=$request->status;
         $ki=$request->kategori_id;
         $f=$request->file;
+       
+
+        $file=null;
+        if ($request->hasFile('file')) {
+            $file=$this->saveFile($request->dari,$request->file('file'));
+        }
+       
 
          $masuk=Masuk::create([
             'nomor'=> $n,

@@ -50,20 +50,20 @@
         
           <?php echo csrf_field();?>
             <div class="form-group">
-              <label for="">Surat Dari</label>
-              <input type="text" name="dari" class="form-control" id="dari" value="{{old('dari')}}" autofocus>
+              <label for="">Surat Dari <span class="form-required">*</span> </label>
+              <input type="text" name="dari" class="form-control" id="dari" value="{{old('dari')}}" placeholder="Contoh : Agus Tri H" autofocus>
                  <span class="help-block text-danger"><strong>{{$errors->first('dari')}}</strong></span>
             </div>
 
             <div class="form-group">
-              <label for="">Nomor Surat</label>
-              <input type="text" name="nomor" class="form-control" id="nomor" value="{{old('nomor')}}">
+              <label for="">Nomor Surat <span class="form-required">*</span></label>
+              <input type="text" name="nomor" class="form-control" id="nomor" value="{{old('nomor')}}" placeholder="XX/2/2019" >
                <span class="help-block text-danger"><strong>{{$errors->first('nomor')}}</strong></span>
             </div>
 
             <div class="form-group">
-              <label for="">Perihal</label>
-              <input type="text" name="perihal" class="form-control" id="perihal" value="{{old('perihal')}}">
+              <label for="">Perihal <span class="form-required" red>*</span></label>
+              <input type="text" name="perihal" class="form-control" id="perihal" value="{{old('perihal')}}" placeholder="Rapat, Seminar dll" >
                <span class="help-block text-danger"><strong>{{$errors->first('perihal')}}</strong></span>
             </div>
 
@@ -78,13 +78,13 @@
             </div>
 
             <div class="form-group">
-              <label for="">Catatan</label>
-              <textarea name="catatan" class="form-control" rows="5" id="catatan">{{old('catatan')}}</textarea>
+              <label for="">Catatan <span class="form-required">*</span></label>
+              <textarea name="catatan" class="form-control" rows="5" id="catatan" placeholder="pakaian, waktu, tempat dll" >{{old('catatan')}}</textarea>
               <span class="help-block text-danger"><strong>{{$errors->first('catatan')}}</strong></span>
             </div>
 
             <div class="form-group" hidden="">
-              <label for="">Status</label>
+              <label for="">Status <span class="form-required">*</span></label>
               <select class="form-control" name="status">
               <option value="Diproses" selected="">Diproses</option>
               <option value="Selesai">Selesai</option>
@@ -93,9 +93,9 @@
 
 
             <div class="form-group">
-              <label for="">File Surat</label>
+              <label for="">File Surat <span class="form-required">(Optional)</span></label>
               <input type="file" name="file" class="form-control" id="file" value="{{old('file')}}">
-           <!--   <span class="help-block text-danger"><strong>{{$errors->first('file')}}</strong></span> -->
+             <span class="help-block text-danger"><strong>{{$errors->first('file')}}</strong></span>
             </div>
         
         </div>
