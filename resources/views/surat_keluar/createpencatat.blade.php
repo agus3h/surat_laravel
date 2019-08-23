@@ -50,37 +50,37 @@
         
           <?php echo csrf_field();?>
             <div class="form-group">
-              <label for="">Surat Kepada</label>
-              <input type="text" name="kepada" class="form-control" id="kepada" value="{{old('kepada')}}" autofocus>
-                 <span class="help-block text-danger"><strong>{{$errors->first('kepada')}}</strong></span>
+              <label for="">Surat Kepada <sup>*</sup></label>
+              <input type="text" name="kepada" class="form-control {{$errors->has('kepada') ? 'is-invalid' : ''}}" id="kepada" value="{{old('kepada')}}" placeholder="Nama Penerima Surat" autofocus>
+                 <span class="help-block text-danger">{{$errors->first('kepada')}}</span>
             </div>
 
             <div class="form-group">
-              <label for="">Nomor Surat</label>
-              <input type="text" name="nomor" class="form-control" id="nomor" value="{{old('nomor')}}">
-               <span class="help-block text-danger"><strong>{{$errors->first('nomor')}}</strong></span>
+              <label for="">Nomor Surat <sup>*</sup></label>
+              <input type="text" name="nomor" class="form-control {{$errors->has('nomor') ? 'is-invalid' : ''}}" id="nomor" value="{{old('nomor')}}" placeholder="xx/xxx/xx">
+               <span class="help-block text-danger">{{$errors->first('nomor')}}</span>
             </div>
 
             <div class="form-group">
-              <label for="">Perihal</label>
-              <input type="text" name="perihal" class="form-control" id="perihal" value="{{old('perihal')}}">
-               <span class="help-block text-danger"><strong>{{$errors->first('perihal')}}</strong></span>
+              <label for="">Perihal <sup>*</sup></label>
+              <input type="text" name="perihal" class="form-control {{$errors->has('perihal') ? 'is-invalid' : ''}}" id="perihal" value="{{old('perihal')}}" placeholder="Perihal">
+               <span class="help-block text-danger">{{$errors->first('perihal')}}</span>
             </div>
 
             <div class="form-group" hidden="">
-              <label for="">Kategori Surat</label>
+              <label for="">Jenis Surat</label>
               <select name="kategori_id" class="form-control" id="kategori_id">
                 @foreach($kategori as $row)
                 <option value="{{$row->id}}">{{$row->nama}}</option>
                 @endforeach
               </select>
-              <span class="help-block text-danger"><strong>{{$errors->first('kategori_id')}}</strong></span>
+              <span class="help-block text-danger">{{$errors->first('kategori_id')}}</span>
             </div>
 
             <div class="form-group">
-              <label for="">Catatan</label>
-              <textarea name="catatan" class="form-control" rows="5" id="catatan">{{old('catatan')}}</textarea>
-              <span class="help-block text-danger"><strong>{{$errors->first('catatan')}}</strong></span>
+              <label for="">Catatan <sup>(Optional)</sup></label>
+              <textarea name="catatan" class="form-control {{$errors->has('catatan') ? 'is-invalid' : ''}}" rows="5" id="catatan" placeholder="Pakaian, Lampiran dll">{{old('catatan')}}</textarea>
+              <span class="help-block text-danger">{{$errors->first('catatan')}}</span>
             </div>
 
             <div class="form-group" hidden="">
@@ -93,16 +93,16 @@
 
 
             <div class="form-group">
-              <label for="">File Surat</label>
+              <label for="">File Surat <sup>(Optional)</sup></label>
               <input type="file" name="file" class="form-control" id="file" value="{{old('file')}}">
-             <span class="help-block text-danger"><strong>{{$errors->first('file')}}</strong></span>
+             <span class="help-block text-danger">{{$errors->first('file')}}</span>
             </div>
         
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
+           <a href="{{route('surat_keluar.index')}}" class="btn btn-default">Kembali</a>
           <button type="submit" class="btn btn-success">Simpan</button>
-          <a href="{{route('surat_keluar.index')}}" class="btn btn-danger">Kembali</a>
         </div>
         <!-- /.card-footer-->
       </div>

@@ -63,7 +63,7 @@ class SuratKeluarController extends Controller
             'nomor'=>'required|max:50',
             'perihal'=>'required|max:50',
             'kategori_id' => 'required|exists:kategoris,id',
-            'catatan'=>'required|max:500',
+            'catatan'=>'nullable|max:500',
             'status'=>'required',
             'file'=>'nullable|mimes:jpg,jpeg,png|max:2048'
             ],
@@ -74,7 +74,6 @@ class SuratKeluarController extends Controller
             'nomor.max'=>'Maksimal 50 karakter..!!!',
             'perihal.required'=>'Perihal harus diisi..!!!',
             'perihal.max'=>'Maksimal 50 karakter..!!!',
-            'catatan.required'=>'Catatan harus diisi',
             'catatan.max'=>'Maksimal 500 karakter..!!!',
             'status.required'=>'Status harus diisi..!!!',
             'kategori_id.required'=>'Kategori harus dipilih..!!!',
@@ -133,9 +132,10 @@ class SuratKeluarController extends Controller
     public function edit($id)
     {
          if (Auth::user()->role=='pencatat') {
-            $keluar= Keluar::findOrFail($id);    
-             $kategori=Kategori::orderBy('nama')->get();
-            return view('surat_keluar.editpencatat',compact('keluar','kategori'));
+            // $keluar= Keluar::findOrFail($id);    
+            //  $kategori=Kategori::orderBy('nama')->get();
+            // return view('surat_keluar.editpencatat',compact('keluar','kategori'));
+            return redirect('home');
         }
          $keluar= Keluar::findOrFail($id);
          $kategori=Kategori::orderBy('nama')->get();

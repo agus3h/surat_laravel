@@ -50,15 +50,16 @@
               <th>Dari</th>  
               <th>Nomor</th>
               <th>Perihal</th>
-              <th>Kategori</th>
+              <th>Jenis Surat</th>
               <th>Catatan</th>
+              <th>Tgl Terima</th>
               <th>File</th>
               <th>Status</th>
               <th>Aksi</th>
            </thead>
            <tbody>
+             <?php $no=1; ?>
             @foreach($masuk as $row)
-            <?php $no=1; ?>
              <tr>
                <td>{{ $no++}}</td>
                <td> {{ $row->dari}}</td>
@@ -66,6 +67,7 @@
                <td> {{ $row->perihal}}</td>
                <td> {{ $row->kategori->nama}}</td>
                <td> {{ $row->catatan}}</td>
+                 <td>{{$row->created_at->formatLocalized(" %d %B %Y")}}</td>
                <td>
                 @if($row->file)
                 <img src="{{asset('public/uploads/surat_masuk/'.$row->file)}}" alt="{{$row->dari}}" width="50px" height="50px">
@@ -74,7 +76,11 @@
                 @endif 
 
               </td>
-               <td> {{ $row->status}}</td>
+              @if($row->status == 'Diproses')
+               <td class="btn btn-success disabled">{{ $row->status}}</td>
+               @else
+               <td class="btn btn-danger disabled">{{ $row->status}}</td>
+               @endif
                <td>
                 <form action="{{route('surat_masuk.destroy',$row->id)}}" method="POST">  
                   <input type="hidden" name="_method" value="DELETE">
@@ -89,8 +95,8 @@
                     </form>
                </td>
              </tr>
-             <?php $no++; ?>
              @endforeach
+             <?php $no++; ?>
            </tbody>
 
 
@@ -98,7 +104,7 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-          Footer
+       
         </div>
         <!-- /.card-footer-->
       </div>

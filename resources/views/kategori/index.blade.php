@@ -43,12 +43,13 @@
          <table class="table table-border" id="data">
            <thead>
               <th>Nomer</th>
-              <th>Nama Kategori</th>  
+              <th>Jenis Surat</th>  
               <th>Aksi</th>
            </thead>
            <tbody>
+             <?php $no=1; ?>
             @foreach($kategori as $row)
-            <?php $no=1; ?>
+           
              <tr>
                <td>{{ $no++}}</td>
                <td> {{ $row->nama}}</td>
@@ -66,8 +67,9 @@
                     </form>
                </td>
              </tr>
-             <?php $no++; ?>
+            
              @endforeach
+              <?php $no++; ?>
            </tbody>
 
 
@@ -75,7 +77,7 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-          Footer
+          
         </div>
         <!-- /.card-footer-->
       </div>

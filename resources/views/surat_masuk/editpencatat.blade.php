@@ -60,7 +60,7 @@
             </div>
 
             <div class="form-group">
-              <label for="">Kategori Surat</label>
+              <label for="">Jenis Surat</label>
               <select name="kategori_id" class="form-control" id="kategori_id">
                 <option value="">Pilih</option>
                 @foreach($kategori as $row)

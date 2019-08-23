@@ -46,8 +46,8 @@ class KategoriController extends Controller
             'nama'=>'required|max:50'
         ];
         $pesan=[
-            'nama.required'=>'Nama kategori harus diisi..!!!',
-            'nama.max'=>'Nama kategori maksimal 50 karakter..!!!'
+            'nama.required'=>'Jenis Surat harus diisi..!!!',
+            'nama.max'=>'Jenis Surat maksimal 50 karakter..!!!'
         ];
         $this->validate($request,$rules,$pesan);
         $n=$request->nama;
@@ -55,7 +55,7 @@ class KategoriController extends Controller
         $kategori=Kategori::firstOrCreate([
             'nama'=> $n
         ]);
-        return redirect(route('kategori.index'))->with('tambah','Kategori : '.$kategori->nama.' berhasil ditambahkan');
+        return redirect(route('kategori.index'))->with('tambah','Jenis Surat : '.$kategori->nama.' berhasil ditambahkan');
     }
 
     /**
@@ -94,8 +94,8 @@ class KategoriController extends Controller
             'nama'=>'required|max:50'
         ];
         $pesan=[
-            'nama.required'=>'nama harus diisi',
-            'nama.max:50'=>'nama maksimal 50 karakter'
+            'nama.required'=>'Jenis Surat harus diisi',
+            'nama.max:50'=>'Jenis Surat maksimal 50 karakter'
         ];
         $this->validate($request,$rules,$pesan);
         $n=$request->nama;
@@ -104,7 +104,7 @@ class KategoriController extends Controller
         Kategori::find($id)->update([
             'nama'=> $n,
         ]);
-         return redirect('/kategori')->with('edit','Kategori berhasil diubah');
+         return redirect('/kategori')->with('edit','Data berhasil diubah');
     }
 
     /**
@@ -117,6 +117,6 @@ class KategoriController extends Controller
     {
         $kategori=Kategori::findOrFail($id);
         $kategori->delete();
-        return redirect()->back()->with('delete','Kategori '.$kategori->nama.' berhasil dihapus');
+        return redirect()->back()->with('delete','Jenis Surat '.$kategori->nama.' berhasil dihapus');
     }
 }

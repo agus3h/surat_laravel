@@ -8,7 +8,7 @@ use App\Masuk;
 use App\Kategori;
 use File;
 use Image;
-
+use Carbon\Carbon;
 
 class SuratMasukController extends Controller
 {
@@ -66,7 +66,7 @@ class SuratMasukController extends Controller
             'nomor'=>'required|max:50',
             'perihal'=>'required|max:50',
             'kategori_id' => 'required|exists:kategoris,id',
-            'catatan'=>'required|max:500',
+            'catatan'=>'nullable|max:500',
             'status'=>'required',
             'file'=>'nullable|mimes:jpg,jpeg,png|max:2084'
         ];
@@ -77,7 +77,6 @@ class SuratMasukController extends Controller
             'nomor.max'=>'Maksimal 50 karakter..!!!',
             'perihal.required'=>'Perihal harus diisi..!!!',
             'perihal.max'=>'Maksimal 50 karakter..!!!',
-            'catatan.required'=>'Catatan harus diisi..!!!',
             'catatan.max'=>'Maksimal 500 karakter..!!!',
             'status.required'=>'Status harus diisi..!!!',
             'kategori_id.required'=>'Kategori harus dipilih..!!!',
@@ -144,10 +143,10 @@ class SuratMasukController extends Controller
     public function edit($id)
     {
         if (Auth::user()->role=='pencatat') {
-        $masuk= Masuk::findOrFail($id);    
-        $kategori=Kategori::orderBy('nama')->get();
-        return view('surat_masuk.editpencatat',compact('masuk','kategori'));
-        // return redirect(route('home'));
+        // $masuk= Masuk::findOrFail($id);    
+        // $kategori=Kategori::orderBy('nama')->get();
+        // return view('surat_masuk.editpencatat',compact('masuk','kategori'));
+        return redirect(route('home'));
         }
         $masuk= Masuk::findOrFail($id);
         $kategori=Kategori::orderBy('nama')->get();

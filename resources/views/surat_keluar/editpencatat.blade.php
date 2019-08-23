@@ -42,38 +42,38 @@
         
           <?php echo csrf_field();?>
             <div class="form-group">
-              <label for="">Surat Kepada</label>
+              <label for="">Surat Kepada <sup>*</sup></label>
               <input type="text" name="kepada" class="form-control" id="kepada" value="{{$keluar->kepada}}">
-                 <span class="help-block text-danger"><strong>{{$errors->first('kepada')}}</strong></span>
+                 <span class="help-block text-danger">{{$errors->first('kepada')}}</span>
             </div>
 
             <div class="form-group">
-              <label for="">Nomor Surat</label>
+              <label for="">Nomor Surat <sup>*</sup></label>
               <input type="text" name="nomor" class="form-control" id="nomor" value="{{$keluar->nomor}}">
-               <span class="help-block text-danger"><strong>{{$errors->first('nomor')}}</strong></span>
+               <span class="help-block text-danger">{{$errors->first('nomor')}}</span>
             </div>
 
             <div class="form-group">
-              <label for="">Perihal</label>
+              <label for="">Perihal <sup>*</sup></label>
               <input type="text" name="perihal" class="form-control" id="perihal" value="{{$keluar->perihal}}">
-               <span class="help-block text-danger"><strong>{{$errors->first('perihal')}}</strong></span>
+               <span class="help-block text-danger">{{$errors->first('perihal')}}</span>
             </div>
 
             <div class="form-group" hidden="">
-              <label for="">Kategori Surat</label>
+              <label for="">Jenis Surat</label>
               <select name="kategori_id" class="form-control" id="kategori_id">
                 <option value="">Pilih</option>
                 @foreach($kategori as $row)
               <option value="{{$row->id}}" {{$row->id == $keluar->kategori_id ? 'selected':''}}>{{$row->nama}}</option>
                 @endforeach
               </select>
-              <span class="help-block text-danger"><strong>{{$errors->first('kategori_id')}}</strong></span>
+              <span class="help-block text-danger">{{$errors->first('kategori_id')}}</span>
             </div>
 
             <div class="form-group">
-              <label for="">Catatan</label>
+              <label for="">Catatan <sup>(Optional)</sup></label>
               <textarea name="catatan" class="form-control" rows="5" id="catatan">{{$keluar->catatan}}</textarea>
-              <span class="help-block text-danger"><strong>{{$errors->first('catatan')}}</strong></span>
+              <span class="help-block text-danger">{{$errors->first('catatan')}}</span>
             </div>
 
             <div class="form-group" hidden="">
@@ -86,7 +86,7 @@
 
 
             <div class="form-group">
-              <label for="">File Surat</label>
+              <label for="">File Surat <sup>(Optional)</sup></label>
               <input type="file" name="file" class="form-control">
          <!--     <span class="help-block text-danger">{{$errors->first('file')}}</span> -->
              <img src="{{asset('public/uploads/surat_keluar/'.$keluar->file)}}" class="img-thumbnail" width="1200px" height="50px">

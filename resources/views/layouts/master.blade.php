@@ -16,7 +16,7 @@
    <!-- Tempusdominus Bbootstrap 4 -->
   <link rel="stylesheet" href="{{ asset('public/plugins/tempusdominus-bootstrap-4/css/tempusdominus-bootstrap-4.min.css')}}">
   <!-- Datatables -->
-<link rel="stylesheet" href="{{ asset('public/plugins/datatables/jquery.dataTables.min.css')}}">
+  <link rel="stylesheet" href="{{ asset('public/plugins/datatables/jquery.dataTables.min.css')}}">
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
@@ -44,7 +44,7 @@
           <img src="{{asset('public/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="{{route('home')}}" class="d-block">{{ Auth::user()->name }}</a>
         </div>
       </div>
 
@@ -78,7 +78,7 @@
             <a href="#" class="nav-link">
               <i class="nav-icon fas fa-bookmark"></i>
               <p>
-                Kategori
+                Jenis Surat
                 <i class="right fas fa-angle-left"></i>
               </p>
             </a>
@@ -86,7 +86,7 @@
               <li class="nav-item">
                 <a href="{{route('kategori.index')}}" class="nav-link">
                   <i class="far fa-circle nav-icon"></i>
-                  <p>Data Kategori</p>
+                  <p>Data Jenis Surat</p>
                 </a>
               </li>
             </ul>
@@ -121,7 +121,7 @@
           <li class="nav-item">
                 <a href="{{route('logout')}}" onclick="event.preventDefault();
               document.getElementById('logout-form').submit();" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
+                  <i class="fas fa-sign-out-alt"></i>
                   <p>Logout</p>
                 </a>
               <form id="logout-form" action="{{ route('logout') }}" method="POST" style="display: none;">

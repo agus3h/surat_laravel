@@ -51,18 +51,20 @@
               <th>Nomor</th>
               <th>Perihal</th>
               <th>Catatan</th>
+              <th>Tgl Kirim</th>
               <th>File</th>
               <th>Aksi</th>
            </thead>
            <tbody>
-            @foreach($keluar as $row)
             <?php $no=1; ?>
+            @foreach($keluar as $row)
              <tr>
                <td>{{ $no++}}</td>
                <td> {{ $row->kepada}}</td>
                <td> {{ $row->nomor}}</td>
                <td> {{ $row->perihal}}</td>
                <td> {{ $row->catatan}}</td>
+               <td>{{$row->created_at->formatLocalized(" %d %B %Y")}} 
                <td>
                  @if($row->file)
                 <img src="{{asset('public/uploads/surat_keluar/'.$row->file)}}" alt="{{$row->kepada}}" width="50px" height="50px">
@@ -76,7 +78,7 @@
                   <button class="btn btn-danger btn-sm"><i class="fa fa-trash"></i></button>
 
                     <!--FUNGSI EDIT-->
-                    <a href="{{route('surat_keluar.edit', $row->id)}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>  
+                  <!--   <a href="{{route('surat_keluar.edit', $row->id)}}" class="btn btn-warning btn-sm"><i class="fa fa-edit"></i></a>   -->
                     <!---->
 
                     <?php echo csrf_field(); ?>
@@ -84,8 +86,8 @@
                     </form>
                </td>
              </tr>
-             <?php $no++; ?>
              @endforeach
+             <?php $no++; ?>
            </tbody>
 
 
@@ -93,7 +95,7 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-          Footer
+        
         </div>
         <!-- /.card-footer-->
       </div>

@@ -1,4 +1,4 @@
-                  @extends('layouts.master')
+@extends('layouts.master')
 
 @section('content')
  <div class="content-wrapper">
@@ -51,10 +51,10 @@
                         {{ csrf_field() }}
 
                         <div class="form-group{{ $errors->has('name') ? ' has-error' : '' }}">
-                            <label for="name" class="col-md-4 control-label">Name</label>
+                            <label for="name" class="col-md-4 control-label">Nama</label>
 
                           
-                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" required autofocus>
+                                <input id="name" type="text" class="form-control" name="name" value="{{ old('name') }}" placeholder="Nama Lengkap" required autofocus>
 
                                 @if ($errors->has('name'))
                                     <span class="help-block">
@@ -68,7 +68,7 @@
                             <label for="email" class="col-md-4 control-label">E-Mail Address</label>
 
                             
-                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" required>
+                                <input id="email" type="email" class="form-control" name="email" value="{{ old('email') }}" placeholder="Email" required>
 
                                 @if ($errors->has('email'))
                                     <span class="help-block">
@@ -82,7 +82,7 @@
                             <label for="password" class="col-md-4 control-label">Password</label>
 
                           
-                                <input id="password" type="password" class="form-control" name="password" required>
+                                <input id="password" type="password" class="form-control" name="password" placeholder="Password" required>
 
                                 @if ($errors->has('password'))
                                     <span class="help-block">
@@ -96,13 +96,13 @@
                             <label for="password-confirm" class="col-md-4 control-label">Confirm Password</label>
 
                            
-                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" required>
+                                <input id="password-confirm" type="password" class="form-control" name="password_confirmation" placeholder="Konfirmasi Password" required>
                           
                         </div>
 
 
                         <div class="form-group">
-                            <label for="role">Status</label>
+                            <label for="role" class="col-md-4 control-label">Role Akses</label>
 
                            
                                 <select name="role" id="role" class="form-control">
@@ -115,6 +115,9 @@
 
                     </div>
                         <div class="card-footer">
+                             <a href="{{route('user.index')}}" class="btn btn-default">
+                                    Kembali
+                                </a>
                                 <button type="submit" class="btn btn-primary">
                                     Register
                                 </button>

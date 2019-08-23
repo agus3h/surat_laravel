@@ -50,15 +50,17 @@
               <th>Kepada</th>  
               <th>Nomor</th>
               <th>Perihal</th>
-              <th>Kategori</th>
+              <th>Jenis Surat</th>
               <th>Catatan</th>
+              <th>Tgl Kirim</th>
               <th>File</th>
               <th>Status</th>
               <th>Aksi</th>
            </thead>
            <tbody>
+             <?php $no=1; ?>
             @foreach($keluar as $row)
-            <?php $no=1; ?>
+           
              <tr>
                <td>{{ $no++}}</td>
                <td> {{ $row->kepada}}</td>
@@ -66,6 +68,7 @@
                <td> {{ $row->perihal}}</td>
                <td> {{ $row->kategori->nama}}</td>
                <td> {{ $row->catatan}}</td>
+               <td>{{$row->created_at->formatLocalized(" %d %B %Y")}} 
                <td>
                 @if($row->file)
                 <img src="{{asset('public/uploads/surat_keluar/'.$row->file)}}" alt="{{$row->kepada}}" width="50px" height="50px">
@@ -73,10 +76,10 @@
                 <img src="{{asset('public/uploads/no-image.png')}}" width="50px" height="50px">
                 @endif
               </td>
-              @if($row->status== 'Diproses')
-               <td><i class="fas fa-plus">{{ $row->status}}</i></td>
+               @if($row->status == 'Diproses')
+               <td class="btn btn-success disabled">{{ $row->status}}</td>
                @else
-               <td><i class="fas fa-trash">{{ $row->status}}</i></td>
+               <td class="btn btn-danger disabled">{{ $row->status}}</td>
                @endif
                <td>
                 <form action="{{route('surat_keluar.destroy',$row->id)}}" method="POST">  
@@ -92,8 +95,8 @@
                     </form>
                </td>
              </tr>
-             <?php $no++; ?>
              @endforeach
+             <?php $no++; ?>
            </tbody>
 
 
@@ -101,7 +104,7 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-          Footer
+          
         </div>
         <!-- /.card-footer-->
       </div>

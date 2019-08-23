@@ -7,7 +7,7 @@
       <div class="container-fluid">
         <div class="row mb-2">
           <div class="col-sm-6">
-            <h1>Data Kategori</h1>
+            <h1>Data Jenis Surat</h1>
           </div>
           
         </div>
@@ -20,7 +20,7 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Input Data Kategori</h3>
+          <h3 class="card-title">Input Data Jenis Surat</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
@@ -37,16 +37,16 @@
         
           <?php echo csrf_field();?>
             <div class="form-group">
-              <label for="">Nama Kategori</label>
-              <input type="text" name="nama" class="form-control" id="nama" value="{{old('nama')}}" autofocus>
-               <span class="help-block text-danger"><strong>{{$errors->first('nama')}}</strong></span>
+              <label for="">Jenis Surat <sup>*</sup></label>
+              <input type="text" name="nama" class="form-control" id="nama" value="{{old('nama')}}" placeholder="Biasa, Rahasia, Penting dll" autofocus>
+               <span class="help-block text-danger">{{$errors->first('nama')}}</span>
             </div>
         
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
+           <a href="{{route('kategori.index')}}" class="btn btn-default">Kembali</a>
           <button type="submit" class="btn btn-success">Simpan</button>
-          <a href="{{route('kategori.index')}}" class="btn btn-danger">Kembali</a>
         </div>
         <!-- /.card-footer-->
       </div>

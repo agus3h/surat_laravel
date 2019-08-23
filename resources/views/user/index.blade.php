@@ -54,8 +54,8 @@
               <th>Aksi</th>
            </thead>
            <tbody>
-            @foreach($user as $row)
             <?php $no=1; ?>
+            @foreach($user as $row)
              <tr>
                <td>{{ $no++}}</td>
                <td> {{ $row->name}}</td>
@@ -75,8 +75,8 @@
                     </form>
                </td>
              </tr>
-             <?php $no++; ?>
              @endforeach
+             <?php $no++; ?>
            </tbody>
 
 
@@ -84,7 +84,7 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-          Footer
+        
         </div>
         <!-- /.card-footer-->
       </div>
