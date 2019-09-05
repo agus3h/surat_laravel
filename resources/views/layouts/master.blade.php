@@ -41,10 +41,10 @@
       <!-- Sidebar user (optional) -->
       <div class="user-panel mt-3 pb-3 mb-3 d-flex">
         <div class="image">
-          <img src="{{asset('public/dist/img/user2-160x160.jpg')}}" class="img-circle elevation-2" alt="User Image">
+          <img src="{{asset('public/uploads/no-image.png')}}" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="{{route('home')}}" class="d-block">{{ Auth::user()->name }}</a>
+          <a href="{{route('home')}}" class="d-block">{{ Ucfirst(Auth::user()->name) }}</a>
         </div>
       </div>
 
@@ -164,6 +164,7 @@
 <script src="{{ asset('public/plugins/jquery/jquery.min.js')}}"></script>
 <!-- Datatables -->
 <script src="{{ asset('public/plugins/datatables/jquery.dataTables.min.js')}}"></script>
+
 <!-- Bootstrap 4 -->
 <script src="{{ asset('public/plugins/bootstrap/js/bootstrap.bundle.min.js')}}"></script>
 <!-- FastClick -->

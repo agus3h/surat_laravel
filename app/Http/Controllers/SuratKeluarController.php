@@ -8,7 +8,7 @@ use App\Keluar;
 use App\Kategori;
 use File;
 use Image;
-
+use App\Exports\KeluarExport;
 
 class SuratKeluarController extends Controller
 {
@@ -63,7 +63,7 @@ class SuratKeluarController extends Controller
             'nomor'=>'required|max:50',
             'perihal'=>'required|max:50',
             'kategori_id' => 'required|exists:kategoris,id',
-            'catatan'=>'nullable|max:500',
+            'catatan'=>'nullable|max:100',
             'status'=>'required',
             'file'=>'nullable|mimes:jpg,jpeg,png|max:2048'
             ],
@@ -74,7 +74,7 @@ class SuratKeluarController extends Controller
             'nomor.max'=>'Maksimal 50 karakter..!!!',
             'perihal.required'=>'Perihal harus diisi..!!!',
             'perihal.max'=>'Maksimal 50 karakter..!!!',
-            'catatan.max'=>'Maksimal 500 karakter..!!!',
+            'catatan.max'=>'Maksimal 100 karakter..!!!',
             'status.required'=>'Status harus diisi..!!!',
             'kategori_id.required'=>'Kategori harus dipilih..!!!',
             'file.mimes'=>'Format file harus jpg,jpeg atau png..!!!'
@@ -123,6 +123,20 @@ class SuratKeluarController extends Controller
         //
     }
 
+     public function proses(Request $request, $id)
+    {
+        $keluar= Keluar::findOrFail($id);
+        $keluar::find($id)->update(['status'=>'Selesai']); 
+        return redirect(route('surat_keluar.index'));
+    }
+
+    public function selesai(Request $request, $id)
+    {
+        $keluar= Keluar::findOrFail($id);
+        $keluar::find($id)->update(['status'=>'Diproses']); 
+        return redirect(route('surat_keluar.index'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -139,6 +153,7 @@ class SuratKeluarController extends Controller
         }
          $keluar= Keluar::findOrFail($id);
          $kategori=Kategori::orderBy('nama')->get();
+       
          return view('surat_keluar.edit',compact('keluar','kategori'));
     }
 
@@ -156,7 +171,7 @@ class SuratKeluarController extends Controller
             'nomor'=>'required|max:50',
             'perihal'=>'required|max:50',
             'kategori_id' => 'required|exists:kategoris,id',
-            'catatan'=>'required|max:500',
+            'catatan'=>'nullable|max:100',
             'status'=>'required',
             'file'=>'nullable|image|mimes:jpg,jpeg,png|max:2084'
         ];
@@ -168,20 +183,12 @@ class SuratKeluarController extends Controller
             'perihal.required'=>'perihal harus diisi',
             'perihal.max'=>'maksimal 50 karakter',
             'catatan.required'=>'Catatan harus diisi',
-            'catatan.max'=>'maksimal 500 karakter',
+            'catatan.max'=>'maksimal 100 karakter',
             'status.required'=>'Status harus diisi',
             'kategori_id.required'=>'Kategori harus diisi',
             'file.mimes:jpg,png,jpeg'=>'Format file harus jpg,jpeg atau png',
             'file.max'=>'File terlalu besar'
         ];
-
-        $keluar= Keluar::findOrFail($id);   
-        $file=$keluar->file;
-
-        if ($request->hasFile('file')) {
-            !empty($file) ? File::delete(public_path('uploads/surat_keluar/'.$file)):null;
-            $file=$this->saveFile($request->kepada,$request->file('file'));
-        }
 
 
         $this->validate($request,$rules,$pesan);
@@ -192,9 +199,14 @@ class SuratKeluarController extends Controller
         $s=$request->status;
         $ki=$request->kategori_id;
         $f=$request->file;
-    
 
+        $keluar= Keluar::findOrFail($id);   
+        $file=$keluar->file;
 
+        if ($request->hasFile('file')) {
+            !empty($file) ? File::delete(public_path('uploads/surat_keluar/'.$file)):null;
+            $file=$this->saveFile($request->kepada,$request->file('file'));
+        }
         
         Keluar::find($id)->update([
             'nomor'=> $n,
@@ -238,5 +250,9 @@ class SuratKeluarController extends Controller
         //hapus data dari table
         $keluar->delete();
         return redirect(route('surat_keluar.index'))->with('delete','Surat : '.$keluar->kepada.' berhasil dihapus');
+    }
+     public function excel(){
+        return (new KeluarExport)->download('surat_keluar.xlsx');
+
     }
 }

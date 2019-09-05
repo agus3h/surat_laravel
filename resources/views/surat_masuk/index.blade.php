@@ -1,6 +1,7 @@
  @extends('layouts.master')
 
 @section('content')
+
  <div class="content-wrapper">
     <!-- Content Header (Page header) -->
     <section class="content-header">
@@ -22,12 +23,11 @@
         <div class="card-header">
           
           <a href="{{route('surat_masuk.create')}}" class="btn btn-success btn-sm"><i class="fas fa-plus"></i>Tambah</a>
+           <a href="{{route('surat_masuk.excel')}}" class="btn btn-primary btn-sm"><i class="fas fa-book"></i>Cetak</a>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fas fa-times"></i></button>
           </div>
         </div>
         <div class="card-body">
@@ -66,8 +66,8 @@
                <td> {{ $row->nomor}}</td>
                <td> {{ $row->perihal}}</td>
                <td> {{ $row->kategori->nama}}</td>
-               <td> {{ $row->catatan}}</td>
-                 <td>{{$row->created_at->formatLocalized(" %d %B %Y")}}</td>
+               <td><textarea readonly="" disabled="">{{ $row->catatan}}</textarea></td>
+               <td>{{$row->created_at->formatLocalized(" %d %B %Y")}}</td>
                <td>
                 @if($row->file)
                 <img src="{{asset('public/uploads/surat_masuk/'.$row->file)}}" alt="{{$row->dari}}" width="50px" height="50px">
@@ -76,10 +76,15 @@
                 @endif 
 
               </td>
+
               @if($row->status == 'Diproses')
-               <td class="btn btn-success disabled">{{ $row->status}}</td>
+               <td>
+                 <a href="{{route('surat_masuk.proses', $row->id)}}" class="btn btn-success">Diproses</a>
+              </td>
                @else
-               <td class="btn btn-danger disabled">{{ $row->status}}</td>
+               <td> 
+                <a href="{{route('surat_masuk.selesai', $row->id)}}" class="btn btn-default"><strong>Selesai</strong></a>
+               </td>
                @endif
                <td>
                 <form action="{{route('surat_masuk.destroy',$row->id)}}" method="POST">  

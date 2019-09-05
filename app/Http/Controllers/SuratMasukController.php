@@ -9,9 +9,12 @@ use App\Kategori;
 use File;
 use Image;
 use Carbon\Carbon;
+use App\Exports\MasukExport;
+use Excel;
 
 class SuratMasukController extends Controller
 {
+
     /**
      * Display a listing of the resource.
      *
@@ -62,22 +65,22 @@ class SuratMasukController extends Controller
     public function store(Request $request)
     {
         $rules=[
-            'dari'=>'required|max:50',
-            'nomor'=>'required|max:50',
-            'perihal'=>'required|max:50',
+            'dari'=>'required|max:30',
+            'nomor'=>'required|max:20',
+            'perihal'=>'required|max:35',
             'kategori_id' => 'required|exists:kategoris,id',
-            'catatan'=>'nullable|max:500',
+            'catatan'=>'nullable|max:100',
             'status'=>'required',
             'file'=>'nullable|mimes:jpg,jpeg,png|max:2084'
         ];
         $pesan=[
             'dari.required'=>'Surat dari siapa..!!!',
-            'dari.max'=>'Maksimal 50 karakter..!!!',
+            'dari.max'=>'Maksimal 30 karakter..!!!',
             'nomor.required'=>'Nomor surat harus diisi..!!!',
-            'nomor.max'=>'Maksimal 50 karakter..!!!',
+            'nomor.max'=>'Maksimal 20 karakter..!!!',
             'perihal.required'=>'Perihal harus diisi..!!!',
-            'perihal.max'=>'Maksimal 50 karakter..!!!',
-            'catatan.max'=>'Maksimal 500 karakter..!!!',
+            'perihal.max'=>'Maksimal 35 karakter..!!!',
+            'catatan.max'=>'Maksimal 100 karakter..!!!',
             'status.required'=>'Status harus diisi..!!!',
             'kategori_id.required'=>'Kategori harus dipilih..!!!',
             'file.mimes'=>'Format file harus jpg,jpeg atau png..!!!',
@@ -134,6 +137,20 @@ class SuratMasukController extends Controller
         //
     }
 
+    public function proses(Request $request, $id)
+    {
+        $masuk= Masuk::findOrFail($id);
+        $masuk::find($id)->update(['status'=>'Selesai']); 
+        return redirect(route('surat_masuk.index'));
+    }
+
+    public function selesai(Request $request, $id)
+    {
+        $masuk= Masuk::findOrFail($id);
+        $masuk::find($id)->update(['status'=>'Diproses']); 
+        return redirect(route('surat_masuk.index'));
+    }
+
     /**
      * Show the form for editing the specified resource.
      *
@@ -164,29 +181,37 @@ class SuratMasukController extends Controller
     {
 
       $rules=[
-            'dari'=>'required|max:50',
-            'nomor'=>'required|max:50',
-            'perihal'=>'required|max:50',
+            'dari'=>'required|max:30',
+            'nomor'=>'required|max:20',
+            'perihal'=>'required|max:35',
             'kategori_id' => 'required|exists:kategoris,id',
-            'catatan'=>'required|max:500',
+            'catatan'=>'nullable|max:100',
             'status'=>'required',
-            'file'=>'nullable|file|mimes:jpg,jpeg,png|max:2048'
+            'file'=>'nullable|mimes:jpg,jpeg,png|max:2048'
         ];
         $pesan=[
             'dari.required'=>'Surat dari siapa..!!!',
-            'dari.max'=>'Maksimal 50 karakter..!!!',
+            'dari.max'=>'Maksimal 30 karakter..!!!',
             'nomor.required'=>'Nomor surat harus diisi..!!!',
-            'nomor.max'=>'Maksimal 50 karakter..!!!',
+            'nomor.max'=>'Maksimal 20 karakter..!!!',
             'perihal.required'=>'Perihal harus diisi..!!!',
-            'perihal.max'=>'Maksimal 50 karakter..!!!',
+            'perihal.max'=>'Maksimal 35 karakter..!!!',
             'catatan.required'=>'Catatan harus diisi..!!!',
-            'catatan.max'=>'Maksimal 500 karakter..!!!',
+            'catatan.max'=>'Maksimal 100 karakter..!!!',
             'status.required'=>'Status harus diisi..!!!',
             'kategori_id.required'=>'Kategori harus dipilih..!!!',
             'file.mimes'=>'Format file harus jpg,jpeg atau png..!!!',
             'file.max'=>'File terlalu besar..!!!'
         ];
 
+         $this->validate($request,$rules,$pesan);
+        $n=$request->nomor;
+        $d=$request->dari;
+        $p=$request->perihal;
+        $c=$request->catatan;
+        $s=$request->status;
+        $ki=$request->kategori_id;
+        $f=$request->file;
 
         $masuk= Masuk::findOrFail($id);   
         $file=$masuk->file;
@@ -196,18 +221,6 @@ class SuratMasukController extends Controller
             $file=$this->saveFile($request->dari,$request->file('file'));
         }
         
-       
-
-        $this->validate($request,$rules,$pesan);
-        $n=$request->nomor;
-        $d=$request->dari;
-        $p=$request->perihal;
-        $c=$request->catatan;
-        $s=$request->status;
-        $ki=$request->kategori_id;
-        $f=$request->file;
-
-         
         Masuk::find($id)->update([
             'nomor'=> $n,
             'dari'=> $d,
@@ -241,6 +254,13 @@ class SuratMasukController extends Controller
         }
         //hapus data dari table
         $masuk->delete();
-        return redirect(route('surat_masuk.index'))->with('delete','Surat : '.$masuk->dari.' berhasil dihapus');
+        return redirect(route('surat_masuk.index'))->with('delete','Surat : '.$masuk->dari.' berhasil dihapus');    
+      
     }
+
+     public function excel()
+     {
+        return (new MasukExport)->download('surat_masuk.xlsx');
+     }
 }
+

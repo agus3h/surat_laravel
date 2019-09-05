@@ -17,6 +17,7 @@ class UserController extends Controller
         $this->middleware('auth');
     }
     
+
     public function index()
     {
         $user=User::orderBy('created_at','DESC')->paginate(5);

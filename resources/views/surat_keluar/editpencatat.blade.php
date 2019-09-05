@@ -24,9 +24,7 @@
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fas fa-times"></i></button>
+            <i class="fas fa-minus"></i></button>
           </div>
         </div>
 
@@ -79,8 +77,8 @@
             <div class="form-group" hidden="">
               <label for="">Status</label>
               <select class="form-control" name="status">
-              <option value="Diproses"{{old('status') == 'Diproses' ? 'selected':''}}>Diproses</option>
-              <option value="Selesai" {{old('status') == 'Selesai' ? 'selected':''}}>Selesai</option>
+             <option value="Diproses"{{($masuk->status) == 'Diproses' ? 'selected':''}}>Diproses</option>
+               <option value="Selesai"{{($masuk->status) == 'Selesai' ? 'selected':''}}>Selesai</option>
               </select>
             </div>
 
@@ -95,8 +93,8 @@
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
+          <a href="{{route('surat_keluar.index')}}" class="btn btn-default">Kembali</a>
           <button type="submit" class="btn btn-success">Simpan</button>
-          <a href="{{route('surat_keluar.index')}}" class="btn btn-danger">Kembali</a>
         </div>
         <!-- /.card-footer-->
       </div>

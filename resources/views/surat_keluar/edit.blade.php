@@ -25,8 +25,6 @@
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fas fa-times"></i></button>
           </div>
         </div>
 
@@ -62,7 +60,6 @@
             <div class="form-group">
               <label for="">Jenis Surat <sup>*</sup></label>
               <select name="kategori_id" class="form-control" id="kategori_id">
-                <option value="">Pilih</option>
                 @foreach($kategori as $row)
               <option value="{{$row->id}}" {{$row->id == $keluar->kategori_id ? 'selected':''}}>{{$row->nama}}</option>
                 @endforeach
@@ -76,11 +73,11 @@
               <span class="help-block text-danger">{{$errors->first('catatan')}}</span>
             </div>
 
-            <div class="form-group">
+            <div class="form-group" hidden="">
               <label for="">Status <sup>*</sup></label>
               <select class="form-control" name="status">
-              <option value="Diproses"{{old('status') == 'Diproses' ? 'selected':''}}>Diproses</option>
-              <option value="Selesai" {{old('status') == 'Selesai' ? 'selected':''}}>Selesai</option>
+              <option value="Diproses"{{($keluar->status) == 'Diproses' ? 'selected':''}}>Diproses</option>
+               <option value="Selesai"{{($keluar->status) == 'Selesai' ? 'selected':''}}>Selesai</option>
               </select>
             </div>
 
@@ -88,15 +85,20 @@
             <div class="form-group">
               <label for="">File Surat <sup>(Optional)</sup></label>
               <input type="file" name="file" class="form-control">
-         <!--     <span class="help-block text-danger">{{$errors->first('file')}}</span> -->
-             <img src="{{asset('public/uploads/surat_keluar/'.$keluar->file)}}" class="img-thumbnail" width="1200px" height="50px">
+             <span class="help-block text-danger">{{$errors->first('file')}}</span>
+             @if($keluar->file != ''))
+              <img src="{{asset('public/uploads/surat_keluar/'.$keluar->file)}}"class="img-thumbnail" width="1200px" height="50px">
+              @else
+              <img src="{{asset('public/uploads/no-image.png')}}" class="img-thumbnail" width="1200px" height="50px">
+              @endif              
+            </div>
             </div>
         
         </div>
         <!-- /.card-body -->
         <div class="card-footer">
-          <button type="submit" class="btn btn-success">Simpan</button>
-          <a href="{{route('surat_keluar.index')}}" class="btn btn-danger">Kembali</a>
+          <a href="{{route('surat_keluar.index')}}" class="btn btn-default">Kembali</a>
+           <button type="submit" class="btn btn-success">Simpan</button>
         </div>
         <!-- /.card-footer-->
       </div>

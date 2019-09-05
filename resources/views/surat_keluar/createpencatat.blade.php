@@ -24,9 +24,7 @@
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fas fa-times"></i></button>
+            <i class="fas fa-minus"></i></button>
           </div>
         </div>
 
@@ -57,13 +55,13 @@
 
             <div class="form-group">
               <label for="">Nomor Surat <sup>*</sup></label>
-              <input type="text" name="nomor" class="form-control {{$errors->has('nomor') ? 'is-invalid' : ''}}" id="nomor" value="{{old('nomor')}}" placeholder="xx/xxx/xx">
+              <input type="text" name="nomor" class="form-control {{$errors->has('nomor') ? 'is-invalid' : ''}}" id="nomor" value="{{old('nomor')}}" placeholder="xxxx/xx-xx/xx">
                <span class="help-block text-danger">{{$errors->first('nomor')}}</span>
             </div>
 
             <div class="form-group">
               <label for="">Perihal <sup>*</sup></label>
-              <input type="text" name="perihal" class="form-control {{$errors->has('perihal') ? 'is-invalid' : ''}}" id="perihal" value="{{old('perihal')}}" placeholder="Perihal">
+              <input type="text" name="perihal" class="form-control {{$errors->has('perihal') ? 'is-invalid' : ''}}" id="perihal" value="{{old('perihal')}}" placeholder="Undangan, Pembitahuan, Rapat">
                <span class="help-block text-danger">{{$errors->first('perihal')}}</span>
             </div>
 
@@ -79,7 +77,7 @@
 
             <div class="form-group">
               <label for="">Catatan <sup>(Optional)</sup></label>
-              <textarea name="catatan" class="form-control {{$errors->has('catatan') ? 'is-invalid' : ''}}" rows="5" id="catatan" placeholder="Pakaian, Lampiran dll">{{old('catatan')}}</textarea>
+              <textarea name="catatan" class="form-control {{$errors->has('catatan') ? 'is-invalid' : ''}}" rows="5" id="catatan" placeholder="Waktu, Tempat dll">{{old('catatan')}}</textarea>
               <span class="help-block text-danger">{{$errors->first('catatan')}}</span>
             </div>
 

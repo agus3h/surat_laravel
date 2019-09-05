@@ -4,6 +4,7 @@
 <head>
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge">
+
   <title>App Surat</title>
   <!-- Tell the browser to be responsive to screen width -->
   <meta name="viewport" content="width=device-width, initial-scale=1">
@@ -19,10 +20,18 @@
   <!-- Google Font: Source Sans Pro -->
   <link href="https://fonts.googleapis.com/css?family=Source+Sans+Pro:300,400,400i,700" rel="stylesheet">
 </head>
+<style class="text/css">
+  .login-page {
+     background: url('public/uploads/8.jpg');
+    background-size: cover;
+     background-attachment: fixed;
+     background-repeat: no-repeat; 
+}
+</style>
 <body class="hold-transition login-page">
 <div class="login-box">
   <div class="login-logo">
-    <a href="#"><b>surat_laravel</b></a>
+    <a href="#"><font color="white"><b>surat_laravel</b></font> </a>
   </div>
   <!-- /.login-logo -->
   <div class="card">

@@ -18,13 +18,11 @@
       <!-- Default box -->
       <div class="card">
         <div class="card-header">
-          <h3 class="card-title">Selamat Datang {{ Auth::user()->name }} di App_Surat Laravel</h3>
+          <h3 class="card-title">Selamat Datang <font color="red">{{ Ucfirst(Auth::user()->name) }}</font> di App_Surat Laravel</h3>
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
               <i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fas fa-times"></i></button>
           </div>
         </div>
         <div class="card-body">

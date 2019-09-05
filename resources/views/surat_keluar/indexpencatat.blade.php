@@ -25,9 +25,7 @@
 
           <div class="card-tools">
             <button type="button" class="btn btn-tool" data-widget="collapse" data-toggle="tooltip" title="Collapse">
-              <i class="fas fa-minus"></i></button>
-            <button type="button" class="btn btn-tool" data-widget="remove" data-toggle="tooltip" title="Remove">
-              <i class="fas fa-times"></i></button>
+            <i class="fas fa-minus"></i></button>
           </div>
         </div>
         <div class="card-body">
@@ -63,7 +61,7 @@
                <td> {{ $row->kepada}}</td>
                <td> {{ $row->nomor}}</td>
                <td> {{ $row->perihal}}</td>
-               <td> {{ $row->catatan}}</td>
+               <td><textarea readonly="" disabled=""> {{ $row->catatan}}</textarea></td>
                <td>{{$row->created_at->formatLocalized(" %d %B %Y")}} 
                <td>
                  @if($row->file)
